@@ -1,6 +1,10 @@
-/*const express = require("express");
-const bodyParser = require("body-parser");
-const app = express();
+const express=require("express");
+const bodyParser=require("body-parser");
+
+const log=require("./util/Logger");
+const db=require("./util/db");
+
+const app=express();
 
 app.use("/",bodyParser.json());
 app.use("/",(req,res,next)=>{
@@ -10,9 +14,32 @@ app.use("/",(req,res,next)=>{
                              next();
                              });
 app.get("/",(req,res,next)=>{
-                             console.log(req.body.asd);
-                             res.send("hello man");
-                             res.end();
+                             const name=req.body.name;
+                             const password=req.body.password;
+                             db.getDB()
+                               .collection("users")
+                               .findOne({name})
+                               .then(user=>{
+                                            if (!user){
+                                              res.json({code:0,message:"Wrong Name"});
+                                              res.end();
+                                              return;
+                                              }
+                                            if (user.password===password && password!==""){
+                                              log("fku");
+                                              res.json({code:1,message:"Take This !"});
+                                              res.end();
+                                              }else{
+                                                   res.json({code:-1,message:"Wrong Password"});
+                                                   res.end();
+                                                   }
+                                            })
+                               .catch(err=>log(err));
                              });
 const port = process.env.PORT || 3001;
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));*/
+db.connect()
+  .then(()=>{
+             app.listen(port);
+             log("App Is Listening On Port "+port+" !");
+             })
+  .catch(err=>log(err));
