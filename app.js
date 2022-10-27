@@ -1,11 +1,14 @@
 const express=require("express");
-const db=require("./db");
+
+const database=require("./util/db");
+const log=require("./util/Logger");
+
 const app=express();
 app.get("/",(req,res,next)=>{
+                             const db=database.getDB();
                              const name=req.query.name;
                              const password=req.query.password;
-                             db.getDB()
-                               .collection("users")
+                             db.collection("users")
                                .findOne({name})
                                .then(user=>{
                                             if (!user){
@@ -23,8 +26,8 @@ app.get("/",(req,res,next)=>{
                                             });
                              });
 const port=process.env.PORT||3001;
-db.connect()
-  .then(()=>{
-             app.listen(port,()=>console.log("Listening On Port "+port));
-             })
-  .catch(err=>console.log(err));
+database.connect()
+        .then(()=>{
+                   app.listen(port,()=>log("Listening To Port "+port));
+                   })
+        .catch(err=>console.log(err));
