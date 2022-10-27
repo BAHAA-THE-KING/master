@@ -23,8 +23,8 @@ app.get("/",(req,res,next)=>{
                                             });
                              });
 const port=process.env.PORT||3001;
-db.connect()
+/*db.connect()
   .then(()=>{
-             app.listen(port,()=>console.log("Listening On Port "+port));
-             })
-  .catch(err=>console.log(err));
+             */app.listen(port,()=>console.log("Listening On Port "+port));
+             /*})
+  .catch(err=>console.log(err));/*
