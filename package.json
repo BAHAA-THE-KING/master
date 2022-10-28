@@ -1,5 +1,5 @@
 {
-  "name": "some-tests",
+  "name": "Security Check API",
   "version": "1.0.0",
   "description": "test for test",
   "main": "app.js",
@@ -13,6 +13,5 @@
     "body-parser": "^1.20.1",
     "express": "^4.18.2",
     "mongodb": "^4.11.0"
-  },
-  "devDependencies": {}
+  }
 }
