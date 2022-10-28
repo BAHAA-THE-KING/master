@@ -4,10 +4,10 @@ const log=require("./Logger");
 
 let _db;
 exports.connect=()=>{
-                     return MongoClient.connect("mongodb+srv://BAHAA:1C11BiuGJItWGteC@shop.qhv52.mongodb.net/?retryWrites=true&w=majority")
+                     return MongoClient.connect("mongodb+srv://user:xnHKT1rOTM0Yukq1B7jMXYqrUQb26LNO@test.uagawr5.mongodb.net/?retryWrites=true&w=majority")
                                        .then(client=>{
                                                       log("The DB Is Connected");
-                                                      _db=client.db("test");
+                                                      _db=client.db("myApp");
                                                       });
                      };
 exports.getDB=()=>{
